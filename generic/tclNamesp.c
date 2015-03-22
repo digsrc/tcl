@@ -1183,7 +1183,11 @@ TclTeardownNamespace(
 #ifndef BREAK_NAMESPACE_COMPAT
     for (entryPtr = Tcl_FirstHashEntry(&nsPtr->childTable, &search);
 	    entryPtr != NULL;
+#if 0
 	    entryPtr = Tcl_FirstHashEntry(&nsPtr->childTable, &search)) {
+#else
+	    entryPtr = Tcl_NextHashEntry(&search)) {
+#endif
 	childNsPtr = Tcl_GetHashValue(entryPtr);
 	Tcl_DeleteNamespace(childNsPtr);
     }
